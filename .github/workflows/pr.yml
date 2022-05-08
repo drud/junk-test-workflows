@@ -28,6 +28,6 @@ jobs:
       - name: Check value.txt and git log
         run: |
           echo "value=$(cat value.txt)"
-          git log --oneline | head -n 1
+          git log --oneline | head -n 3
           
 
