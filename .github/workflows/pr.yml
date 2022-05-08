@@ -57,3 +57,8 @@ jobs:
           git log --oneline | head -n 3
 
 
+      - name: Check value.txt and git log
+        run: |
+          echo "value=$(cat value.txt)"
+      - name: "Show git log"
+        run: git log --oneline | head -n 3
