@@ -38,10 +38,11 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled }}
 
+      - name: RUNNING WORKFLOW FROM UPSTREAM
+        run: echo "this is the workflow from upstream"
       - name: Check value.txt and git log
         run: |
           echo "value=$(cat value.txt)"
-      - name: "Show git log"
-        run: git log --oneline | head -n 3
+          git log --oneline | head -n 3
 
 
