@@ -49,16 +49,9 @@ jobs:
             echo "GITHUB_TOKEN is set"
           fi
 
-      - name: RUNNING WORKFLOW FROM UPSTREAM
-        run: echo "this is the workflow from upstream"
+      - name: RUNNING WORKFLOW FROM PR
+        run: echo "this is the workflow from PR"
       - name: Check value.txt and git log
         run: |
           echo "value=$(cat value.txt)"
           git log --oneline | head -n 3
-
-
-      - name: Check value.txt and git log
-        run: |
-          echo "value=$(cat value.txt)"
-      - name: "Show git log"
-        run: git log --oneline | head -n 3
