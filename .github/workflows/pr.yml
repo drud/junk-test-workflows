@@ -38,6 +38,17 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled }}
 
+      - name: Check GITHUB_TOKEN
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          if [ "$GITHUB_TOKEN" == "" ]; then
+            echo "GITHUB_TOKEN is not set"
+          else
+            echo "GITHUB_TOKEN is set"
+          fi
+
       - name: RUNNING WORKFLOW FROM UPSTREAM
         run: echo "this is the workflow from upstream"
       - name: Check value.txt and git log
