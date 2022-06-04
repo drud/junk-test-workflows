@@ -1,0 +1,47 @@
+version: '3.6'
+
+services:
+  db:
+    container_name: ddev-test-db
+    image: DDEV_DBIMAGE
+    user: "$DDEV_UID:$DDEV_GID"
+    restart: always
+    environment:
+      - SOME_ENV=env_value_goes_here
+    ports:
+      - 3306
+    labels:
+      com.ddev.site-name: test
+      com.ddev.platform: local
+      com.ddev.app-type: wordpress
+  web:
+    container_name: ddev-test-web
+    image: DDEV_WEBIMAGE
+    user: "$DDEV_UID:$DDEV_GID"
+    volumes:
+      - "../htdocs/:/var/www/html/docroot:cached"
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "80"
+      - 8025
+    working_dir: "/var/www/html/docroot"
+    environment:
+      - DEPLOY_NAME=local
+      - VIRTUAL_HOST=${DDEV_HOSTNAME}
+      - VIRTUAL_PORT=80,8025
+    labels:
+      com.ddev.site-name: test
+      com.ddev.platform: local
+      com.ddev.app-type: wordpress
+    healthcheck:
+      interval: 1s
+      retries: 25
+      start_period: 20s
+      timeout: 120s
+networks:
+  ddev:
+    name: ddev
+    external: true
+
