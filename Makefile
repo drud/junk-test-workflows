@@ -260,3 +260,4 @@ bin-clean:
 print-%: ; @echo $* = $($*)
 
 # A comment
+# Another comment
